@@ -1,0 +1,34 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ main ]
+    paths: ['docs/**', 'mkdocs.yml', '.github/workflows/deploy.yml']   # 只有文档变更才触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install mkdocs-material
+
+      - name: Build site
+        run: mkdocs build   # 生成 site/ 目录
+
+      - name: Deploy to VPS via rsync
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"   # 同步参数，--delete会删除VPS上旧文件
+          SOURCE: "site/"                 # 本地构建目录
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.TARGET }}
