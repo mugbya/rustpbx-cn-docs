@@ -1,0 +1,45 @@
+site_name: RustPBX 系列文档
+site_description: 详尽的 RustPBX 部署与配置指南
+site_url: https://github.com/mugbya/rustpbx-cn-docs  # 或你的自定义域名
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: 切换至深色模式
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: 切换至亮色模式
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - navigation.tabs        # 顶级目录显示为顶部标签页[reference:5]
+    # - navigation.sections    # 顶级部分在侧边栏显示为分组[reference:6]
+    - navigation.expand      # 默认展开所有子目录[reference:7]
+    - navigation.footer
+
+nav:
+  - 首页: index.md
+  - 快速开始: 
+    - 安装部署: quick-start/installation.md
+    - 配置更改: quick-start/configuration.md
+    - 通话准备: quick-start/call-ready.md
+  # - 基础配置: configuration.md
+  # - 代理与核心: config/proxy-core.md
+  # - SIP 协议: sip-protocol.md
+  # - 高可用部署: ha-deployment.md
+  # 按你的实际文档结构增删
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - toc:
+      permalink: true
