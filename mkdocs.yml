@@ -43,3 +43,7 @@ markdown_extensions:
   - pymdownx.tabbed
   - toc:
       permalink: true
+
+# 去掉 最底部的 Made with Material for MkDocs
+extra:
+  generator: false
